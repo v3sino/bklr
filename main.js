@@ -54,7 +54,7 @@ r1.question('Hello, insert the name of your project: ', name => {
         
         for(const x in urls){
             fs.appendFileSync('./'+name+'/url.txt' ,x+': '+urls[x]+'\n', function(err) { if(err) { return console.log(err); } });
-            fs.appendFileSync('./'+name+'/clicker-scraper'+x+'.js' ,scraperString, function(err) { if(err) { return console.log(err); } });
+            fs.appendFileSync('./'+name+'/scraper'+x+'.js' ,scraperString, function(err) { if(err) { return console.log(err); } });
             fs.appendFileSync('./'+name+'/formater'+x+'.js' ,formaterString, function(err) { if(err) { return console.log(err); } });
             fs.appendFileSync('./'+name+'/results/result'+x+'.json' ,'{}', function(err) { if(err) { return console.log(err); } });
         }
@@ -106,7 +106,7 @@ const fs = require('fs');
   const page = await browser.newPage();
   for(const i in urls){
     await page.goto(urls[i]);
-    let scraper = require('./clicker-scraper'+i+'.js');
+    let scraper = require('./scraper'+i+'.js');
     let result = await scraper.scrape(page);
     json = JSON.stringify(result);
     fs.writeFile(__dirname+'/results/result'+i+'.json', json, (err) => { if (err) { return console.log(err); } });
