@@ -21,10 +21,22 @@ const html = `\`<!DOCTYPE html>
 <title>Scraper project</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" charset="utf-8">
 <body>
+<form action="" method="post">
+<button name="refresh" value="refresh" onclick="rfrsh()">Refresh</button>
+</form>
 <div class="data">
  \${formatedData}
 </div>
 </body>
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+function rfrsh(){
+    document.getElementsByName('refresh')[0].innerHTML = 'Wait';
+    document.getElementsByName('refresh')[0].style.opacity = 0.3;
+}
+</script>
 </html>\``;
 
 const readline = require('readline');
@@ -87,15 +99,26 @@ r1.question('Hello, insert the name of your project: ', name => {
         //run html on localhost
         var http = require('http');
         const PORT=8080; 
-        fs.readFile(__dirname+'/index.html', function (err, html) {
-            if (err) throw err;    
-            http.createServer(function(request, response) {  
-                response.writeHeader(200, {"Content-Type": "text/html"});  
-                response.write(html);  
-                response.end();  
-            }).listen(PORT);
-            console.log('Project is running on http://localhost:8080');
-        });
+        http.createServer(function(request, response) {
+            if (request.method === 'POST') {    //post request means user wants a force refresh
+                console.log("refresh requested");
+                scrape();
+                fs.readFile('index.html', function(err, html) {
+                    response.writeHeader(200, {"Content-Type": "text/html"});  
+                    response.write(html);  
+                    response.end();  
+                });
+            }
+            else{
+                fs.readFile('index.html', function(err, html) {
+                    response.writeHeader(200, {"Content-Type": "text/html"});  
+                    response.write(html);  
+                    response.end();  
+                });
+            }
+        }).listen(8080);
+
+        console.log('Project is running on http://localhost:8080');
         `;
         const runnerString = `const puppeteer = require('puppeteer');
 const url = '${url}';
