@@ -74,8 +74,8 @@ node main.js
 ```
 terminal nechat bezat - na localhost:8080 by mal byt vysledok<br>
 data sa refreshuju kazdu hodinu - asi dorobim aby to bolo nastavitelne - pripadne to staci prepisat v setInterval() funkcii v main.js<br>
-pokusim sa dorobit ten button ktory force-ne refresh<br>
 zistil som ze na eve to nasadit nepojde - chromium nepodporuje freebsd tj. nefunguje tam puppeteer<br>
+***update:*** funkcny refresh button, bolo to lahsie nez som cakal<br>
 jednoduchy sposob ako projekt "nasadit" z localhostu aj na internet je napriklad localtunnel:
 ```
 npm install -g localtunnel
