@@ -78,7 +78,7 @@ r1.question('Hello, insert the name of your project: ', name => {
         
         //put the data into index.html
         
-        const url = 'https://www.flashscore.sk/;https://www.rtvs.sk/';
+        const url = '${url}';
         const urls = url.split(';');
         let data = {};
         let formatedData = "";
