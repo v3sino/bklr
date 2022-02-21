@@ -1,0 +1,86 @@
+        x = JSON.parse(data);
+        
+        result += "<h2 style=\"text-align:center;margin-bottom:2px;\">Premier league</h2> <div class=\"pl\" style=\"display:flex;\">"; //pl section         
+        result += "<div class=\"program\" style=\"flex:33%;\"> <h3 style=\"text-align: center;\">PROGRAM</h3>"    //program collumn
+
+        for(let i=0; i<10; i++){
+            let zapas = x['pl']['program'][i];
+            let split = zapas.split(';');
+            let cas = split[0];
+            let teams = split[1].split('   ');
+            result += "<p>"+cas+": <b>"+teams[0]+"</b>"+" - "+"<b>"+teams[2]+"</b>"+"</p>";
+        }
+
+        result += "</div>"  //end of PL program
+        result += "<div class=\"vysledky\" style=\"flex:33%;\"> <h3 style=\"text-align: center;\">VYSLEDKY</h3>"    //vysledky collumn
+
+        for(let i in x['pl']['vysledky']){
+            let zapas = x['pl']['vysledky'][i];
+            let split = zapas.split(';');
+            let cas = split[0];
+            let teams = split[1].split('   ');
+            result += "<p>";
+            if(parseInt(teams[1][0]) > parseInt(teams[1][2])){
+                result += cas+": <b>"+"<span style=\"background-color:#B2FF33 ;\">"+teams[0]+"</span> "+teams[1]+" "+teams[2]+"</b>";
+            }
+            else if(parseInt(teams[1][0]) < parseInt(teams[1][2])){
+                result += cas+": <b>"+teams[0]+" "+teams[1]+" <span style=\"background-color:#B2FF33 ;\">"+teams[2]+"</span></b>";
+            }
+            else{
+                result += cas+": <b>"+split[1]+"</b>";
+            }
+            result += "</p>";
+        }
+
+        result += "</div>"  //end of PL vysledky
+        result += "<div class=\"tabulka\" style=\"flex:33%;\"> <h3 style=\"text-align: center;margin-bottom:2px;\">TABULKA</h3>"    //tabulka collumn
+
+        result += "<table><tr><th>#</th><th>Klub</th><th>oz</th><th>Body</th></tr>";
+        for(let i=1; i<21; i++){
+            let riadok = x['pl']['tabulka'][i];
+            let split = riadok.split(";");
+            result += "<tr><td>"+i+"</td><td>"+split[0]+"</td><td>"+split[1]+"</td><td><b>"+split[2]+"</b></td></tr>";
+        }
+
+        result += "</table></div>"  //end of PL tabulka
+        
+        result += "</div>"; //end of pl section
+
+        result += "<h2 style=\"text-align:center;margin-bottom:2px;\">NHL</h2> <div class=\"nhl\" style=\"display:flex;\">"; //NHL section         
+        result += "<div class=\"program\" style=\"flex:33%;\"> <h3 style=\"text-align: center;\">PROGRAM</h3>"    //program collumn
+
+        for(let i=0; i<10; i++){
+            let zapas = x['nhl']['program'][i];
+            let split = zapas.split(';');
+            let cas = split[0];
+            let teams = split[1].split('   ');
+            result += "<p>"+cas+": <b>"+teams[0]+"</b>"+" - "+"<b>"+teams[2]+"</b>"+"</p>";
+        }
+
+        result += "</div>"  //end of PL program
+        result += "<div class=\"vysledky\" style=\"flex:33%;\"> <h3 style=\"text-align: center;\">VYSLEDKY</h3>"    //vysledky collumn
+
+        for(let i in x['nhl']['vysledky']){
+            let zapas = x['nhl']['vysledky'][i];
+            let split = zapas.split(';');
+            let cas = split[0];
+            let teams = split[1].split('   ');
+            result += "<p>";
+            if(parseInt(teams[1][0]) > parseInt(teams[1][2])){
+                result += cas+": <b>"+"<span style=\"background-color:#B2FF33 ;\">"+teams[0]+"</span> "+teams[1]+" "+teams[2]+"</b>";
+            }
+            else if(parseInt(teams[1][0]) < parseInt(teams[1][2])){
+                result += cas+": <b>"+teams[0]+" "+teams[1]+" <span style=\"background-color:#B2FF33 ;\">"+teams[2]+"</span></b>";
+            }
+            else{
+                result += cas+": <b>"+split[1]+"</b>";
+            }
+            result += "</p>";
+        }
+        result += "</div> <div class=\"placeholder\" style=\"flex:33%;\">";
+        result += "</div> </div>"; //end of NHL section
+        
+
+        //css for the doc
+        result += "<style> body{background-color: linen;} p{font-size: 18px;} table{border: 1px solid black; width: 80%;margin-left: auto;margin-right: auto;}";
+        result+= "th{background-color: #FF0000; margin-left: 40px;} td{border: 1px solid black; padding-left: 4px;padding-right: 4px;} </style>";
