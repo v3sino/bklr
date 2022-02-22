@@ -48,7 +48,7 @@ result['pl'] = {}; result['pl']['program'] = {}; result['pl']['vysledky'] = {}; 
   let table_teams = await page.evaluate(() => Array.from(document.querySelectorAll("div.ui-table__row")).map( (team) => team.innerText )); 
   for(let i=0; i< 20; i++){
     let table_split = table_teams[i].split('\n');
-    result['pl']['tabulka'][i+1] = table_split[1] + ' ' + table_split[2] + ' ' + table_split[7];
+    result['pl']['tabulka'][i+1] = table_split[1] + ';' + table_split[2] + ';' + table_split[7];
   }
 
   //now go to the nhl page and do the same
