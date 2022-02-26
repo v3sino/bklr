@@ -43,6 +43,11 @@ result['pl'] = {}; result['pl']['program'] = {}; result['pl']['vysledky'] = {}; 
     page.click('a.tabs__tab.standings_table'),
     page.waitForNavigation({ waitUntil: 'networkidle0' })
   ]);
+  //if there are live matches underway, we click again to NOT see the live table
+  if(Object.keys(result['pl']['vysledky']).length > 10){
+    await page.click('[href="/table"]');
+    await page.waitForTimeout(1000);  //need to force wait manually because of weird site behaviour
+  }
 
   //get all the table data
   let table_teams = await page.evaluate(() => Array.from(document.querySelectorAll("div.ui-table__row")).map( (team) => team.innerText )); 
