@@ -1,3 +1,7 @@
+module.exports = {
+    format : function(data){    
+        result = "";
+        
         x = JSON.parse(data);
         
         result += "<h2 style=\"text-align:center;margin-bottom:2px;\">Premier league</h2> <div class=\"pl\" style=\"display:flex;\">"; //pl section         
@@ -14,7 +18,29 @@
         result += "</div>"  //end of PL program
         result += "<div class=\"vysledky\" style=\"flex:33%;\"> <h3 style=\"text-align: center;\">VYSLEDKY</h3>"    //vysledky collumn
 
-        for(let i in x['pl']['vysledky']){
+        //first live matches if there are some
+        if(Object.keys(x['pl']['vysledky']).length > 10){
+            for(let i=10; i < Object.keys(x['pl']['vysledky']).length; i++){
+                let zapas = x['pl']['vysledky']['LIVE'+(i-10)];
+                let split = zapas.split(';');
+                let cas = split[0];
+                cas = "<span style=\"color:red;\">"+cas+"</span>";
+                let teams = split[1].split('   ');
+                result += "<p>";
+                if(parseInt(teams[1][0]) > parseInt(teams[1][2])){
+                    result += cas+": <b>"+"<span style=\"background-color:#B2FF33 ;\">"+teams[0]+"</span> "+teams[1]+" "+teams[2]+"</b>";
+                }
+                else if(parseInt(teams[1][0]) < parseInt(teams[1][2])){
+                    result += cas+": <b>"+teams[0]+" "+teams[1]+" <span style=\"background-color:#B2FF33 ;\">"+teams[2]+"</span></b>";
+                }
+                else{
+                    result += cas+": <b>"+split[1]+"</b>";
+                }
+                result += "</p>";
+            }
+        }
+        //now the rest of the results
+        for(let i=0; i<10; i++){
             let zapas = x['pl']['vysledky'][i];
             let split = zapas.split(';');
             let cas = split[0];
@@ -57,10 +83,32 @@
             result += "<p>"+cas+": <b>"+teams[0]+"</b>"+" - "+"<b>"+teams[2]+"</b>"+"</p>";
         }
 
-        result += "</div>"  //end of PL program
-        result += "<div class=\"vysledky\" style=\"flex:33%;\"> <h3 style=\"text-align: center;\">VYSLEDKY</h3>"    //vysledky collumn
+        result += "</div>"  //end of nhl program
+        result += "<div class=\"vysledky\" style=\"flex:33%;\"> <h3 style=\"text-align: center;\">VYSLEDKY</h3>"    //results collumn
 
-        for(let i in x['nhl']['vysledky']){
+        //first live matches if there are some
+        if(Object.keys(x['pl']['vysledky']).length > 10){
+            for(let i=10; i < Object.keys(x['nhl']['vysledky']).length; i++){
+                let zapas = x['nhl']['vysledky']['LIVE'+(i-10)];
+                let split = zapas.split(';');
+                let cas = split[0];
+                cas = "<span style=\"color:red;\">"+cas+"</span>";
+                let teams = split[1].split('   ');
+                result += "<p>";
+                if(parseInt(teams[1][0]) > parseInt(teams[1][2])){
+                    result += cas+": <b>"+"<span style=\"background-color:#B2FF33 ;\">"+teams[0]+"</span> "+teams[1]+" "+teams[2]+"</b>";
+                }
+                else if(parseInt(teams[1][0]) < parseInt(teams[1][2])){
+                    result += cas+": <b>"+teams[0]+" "+teams[1]+" <span style=\"background-color:#B2FF33 ;\">"+teams[2]+"</span></b>";
+                }
+                else{
+                    result += cas+": <b>"+split[1]+"</b>";
+                }
+                result += "</p>";
+            }
+        }
+        //now the rest of the results
+        for(let i=0; i<10; i++){
             let zapas = x['nhl']['vysledky'][i];
             let split = zapas.split(';');
             let cas = split[0];
@@ -84,3 +132,9 @@
         //css for the doc
         result += "<style> body{background-color: linen;} p{font-size: 18px;} table{border: 1px solid black; width: 80%;margin-left: auto;margin-right: auto;}";
         result+= "th{background-color: #FF0000; margin-left: 40px;} td{border: 1px solid black; padding-left: 4px;padding-right: 4px;} </style>";
+        
+
+
+        return result;
+        }        
+}
