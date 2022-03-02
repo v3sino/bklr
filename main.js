@@ -128,7 +128,10 @@ const fs = require('fs');
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   for(const i in urls){
-    await page.goto(urls[i]);
+    await Promise.all([
+      page.goto(urls[i]),
+      page.waitForNavigation({ waitUntil: 'networkidle0' })
+    ]);
     let scraper = require('./scraper'+i+'.js');
     let result = await scraper.scrape(page);
     json = JSON.stringify(result);
