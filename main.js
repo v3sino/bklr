@@ -132,6 +132,7 @@ const fs = require('fs');
       page.goto(urls[i]),
       page.waitForNavigation({ waitUntil: 'networkidle0' })
     ]);
+    await page.waitForTimeout(1000);
     let scraper = require('./scraper'+i+'.js');
     let result = await scraper.scrape(page);
     json = JSON.stringify(result);
