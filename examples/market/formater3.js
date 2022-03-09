@@ -3,7 +3,7 @@ module.exports = {
         result = "";
         
         /* change this code to have nicely parsed output html data - put all the html into the result string */
-        result += "</div class=\"Crypto\">" + "<h2>Cryptocurrencies</h2>"; 
+        result += "<div class=\"Crypto\">" + "<h2>Cryptocurrencies</h2>"; 
         x = JSON.parse(data);
         result += "<table><tr><th>Crypto</th><th>Price</th><th>24H Change</th></tr>";
         for(let i=0; i < 3; i++){
