@@ -8,7 +8,7 @@ module.exports = {
         result += "<table><tr><th>Stock</th><th>Price</th><th>24H Change</th></tr>";
         for(let i=0; i < 3; i++){
             let row = x[i].split(';');
-            if(row[2][0] != '-') row[2] = '+'+row[1];
+            if(row[2][0] != '-') row[2] = '+'+row[2];
             result += "<tr><td>"+row[0]+"</td><td>"+row[1]+"</td><td>"+row[2]+"%</td></tr>";
         }
         result += "</table>";
