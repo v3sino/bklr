@@ -7,7 +7,7 @@ npm i puppeteer
 ``` 
 # nasadenie
 ```
-node main.js
+node init.js
 ```
 postupovat podla terminal promptu - zadat meno projektu a url stranky/stranok na scrapovanie<br>
 **testovaci priklad:**
@@ -79,5 +79,5 @@ zistil som ze na eve to nasadit nepojde - chromium nepodporuje freebsd tj. nefun
 jednoduchy sposob ako projekt "nasadit" z localhostu aj na internet je napriklad localtunnel:
 ```
 npm install -g localtunnel
-lt --port 8000
+lt --port 8080
 ```
