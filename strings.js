@@ -16,7 +16,7 @@ module.exports = {
     scraperString : `module.exports = {
         scrape : async function(page){            
             let result = {}; 
-            //insert your clicker and scraper code here...
+            //insert your scraper code here...
             return(result);
             }        
     }`,
