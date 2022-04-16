@@ -97,7 +97,7 @@ const fs = require('fs');
         fs.appendFileSync('./'+name+'/runner.js' ,runnerString, function(err) { if(err) { return console.log(err); } });
         fs.appendFileSync('./'+name+'/main.js' ,mainString, function(err) { if(err) { return console.log(err); } });
 
-        console.log('Project created :)');
+        console.log('\nProject created :)');
         r1.close();
     });
 });
